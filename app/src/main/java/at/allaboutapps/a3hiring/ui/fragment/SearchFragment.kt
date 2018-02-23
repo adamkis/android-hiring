@@ -3,8 +3,9 @@ package at.allaboutapps.a3hiring.ui.fragment
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,6 @@ import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.RestApi
 import at.allaboutapps.a3hiring.api.models.Club
 import at.allaboutapps.a3hiring.ui.adapter.SearchResultAdapter
-import com.example.run.helper.logDebug
 import com.example.run.helper.logThrowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -22,9 +22,6 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
 import java.net.UnknownHostException
 import javax.inject.Inject
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.DividerItemDecoration
-
 
 
 /**

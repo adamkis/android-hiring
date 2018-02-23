@@ -6,15 +6,10 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import at.allaboutapps.a3hiring.App
+import android.widget.Toast
 import at.allaboutapps.a3hiring.R
-import at.allaboutapps.a3hiring.api.RestApi
 import at.allaboutapps.a3hiring.ui.fragment.SearchFragment
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
-import javax.inject.Inject
+
 
 /**
  * Created by adam on 2018. 02. 23..
@@ -41,10 +36,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-
-        //TODO: handle sort item click
-
+        when( item.itemId ){
+            R.id.menuSortByName -> Toast.makeText(this, "Name", Toast.LENGTH_SHORT).show()
+            R.id.menuSortByValue -> Toast.makeText(this, "Value", Toast.LENGTH_SHORT).show()
+        }
         return super.onOptionsItemSelected(item)
     }
 
