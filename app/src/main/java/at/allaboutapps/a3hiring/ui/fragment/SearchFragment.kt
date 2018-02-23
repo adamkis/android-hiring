@@ -1,19 +1,25 @@
 package at.allaboutapps.a3hiring.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import at.allaboutapps.a3hiring.App
 import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.RestApi
 import at.allaboutapps.a3hiring.api.models.Club
+import at.allaboutapps.a3hiring.ui.adapter.SearchResultAdapter
 import com.example.run.helper.logDebug
 import com.example.run.helper.logThrowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_search.*
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -59,9 +65,11 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun showResults(clubs: Array<Club>) {
-        clubs.forEach {
-            logDebug(it.toString())
-        }
+        searchResultRV.layoutManager = LinearLayoutManager(activity as Context, LinearLayout.VERTICAL, false)
+        searchResultRV.adapter = SearchResultAdapter(clubs, activity as Context)
+//        clubs.forEach {
+//            logDebug(it.toString())
+//        }
     }
 
     override fun onDestroy() {
