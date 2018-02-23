@@ -16,6 +16,6 @@ interface RestApi {
     }
 
     @GET("clubs.json")
-    fun getClubs(): Observable<Array<Club>>
+    fun getClubs(): Observable<ArrayList<Club>>
 
 }

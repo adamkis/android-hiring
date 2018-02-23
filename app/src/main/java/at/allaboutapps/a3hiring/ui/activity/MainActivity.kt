@@ -17,15 +17,16 @@ import at.allaboutapps.a3hiring.ui.fragment.SearchFragment
 
 class MainActivity : AppCompatActivity() {
 
+    var searchFragment: SearchFragment? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById<View>(R.id.toolbar) as Toolbar)
-        var groupsFragment: SearchFragment? = supportFragmentManager
-                .findFragmentById(R.id.fragmentContainer) as? SearchFragment
-        if (groupsFragment == null) {
-            groupsFragment = SearchFragment.newInstance()
-            supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, groupsFragment).commit()
+        searchFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as? SearchFragment
+        if (searchFragment == null) {
+            searchFragment = SearchFragment.newInstance()
+            supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, searchFragment).commit()
         }
     }
 

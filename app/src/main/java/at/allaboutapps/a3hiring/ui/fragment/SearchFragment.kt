@@ -14,6 +14,7 @@ import at.allaboutapps.a3hiring.App
 import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.RestApi
 import at.allaboutapps.a3hiring.api.models.Club
+import at.allaboutapps.a3hiring.api.models.Club.Companion.COMPARE_BY_NAME
 import at.allaboutapps.a3hiring.ui.adapter.SearchResultAdapter
 import com.example.run.helper.logThrowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -21,6 +22,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
 import java.net.UnknownHostException
+import java.util.*
 import javax.inject.Inject
 
 
@@ -33,7 +35,7 @@ class SearchFragment : BaseFragment() {
     @Inject lateinit var restApi: RestApi
     private var callDisposable: Disposable? = null
 
-    private var clubs: Array<Club>? = null
+    private var clubs: ArrayList<Club>? = null
 
     companion object {
         private val ARG_CLUBS = "ARG_CLUBS"
@@ -55,7 +57,7 @@ class SearchFragment : BaseFragment() {
         setUpLoadingAndError(view.findViewById(R.id.loading), view as CoordinatorLayout)
 
         if( savedInstanceState != null ){
-            clubs = savedInstanceState.getParcelableArray(ARG_CLUBS) as Array<Club>?
+            clubs = savedInstanceState.getParcelableArrayList(ARG_CLUBS)
             clubs?.let { showResults(it) }
             showLoading(false)
         }
@@ -65,7 +67,9 @@ class SearchFragment : BaseFragment() {
 
     }
 
-    private fun showResults(clubs: Array<Club>) {
+    private fun showResults(clubs: ArrayList<Club>) {
+
+        Collections.sort(clubs, COMPARE_BY_NAME)
         val itemDecorator = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         itemDecorator.setDrawable(ContextCompat.getDrawable(activity!!, R.drawable.club_list_divider)!!)
         searchResultRV.addItemDecoration(itemDecorator)
@@ -79,7 +83,7 @@ class SearchFragment : BaseFragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelableArray(ARG_CLUBS, clubs)
+        outState.putParcelableArrayList(ARG_CLUBS, clubs)
         super.onSaveInstanceState(outState)
     }
 
