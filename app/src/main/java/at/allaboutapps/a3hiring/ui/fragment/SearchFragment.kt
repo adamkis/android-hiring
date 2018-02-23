@@ -9,10 +9,13 @@ import at.allaboutapps.a3hiring.App
 import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.RestApi
 import at.allaboutapps.a3hiring.api.models.Club
+import com.example.run.helper.logDebug
+import com.example.run.helper.logThrowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 /**
@@ -58,7 +61,7 @@ class SearchFragment : BaseFragment() {
 
     private fun showResults(clubs: Array<Club>) {
         clubs.forEach {
-            Timber.d(it.toString())
+            logDebug(it.toString())
         }
     }
 
@@ -76,33 +79,33 @@ class SearchFragment : BaseFragment() {
 
     private fun loadData(){
         callDisposable = restApi.getClubs()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-//            .doOnSubscribe { mSearchView.setProgressIndicator(true) }
-//            .doAfterTerminate { mSearchView.setProgressIndicator(false) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { showLoading(true) }
+            .doAfterTerminate { showLoading(false) }
                 .subscribe(
                         { response ->
                             clubs = response
                             showResults(response)
                         },
-                        { t ->  }
+                        { t -> handleError(t) }
                 )
     }
 
 
     private fun handleError(t: Throwable){
-//        when(t){
-//            is UnknownHostException -> {
-//                showError(R.string.network_error)
-//            }
-//            is NullPointerException -> {
-//                showError(R.string.could_not_load_data)
-//            }
-//            else -> {
-//                showError(R.string.error)
-//            }
-//        }
-//        logThrowable(t)
+        when(t){
+            is UnknownHostException -> {
+                showError(R.string.network_error)
+            }
+            is NullPointerException -> {
+                showError(R.string.could_not_load_data)
+            }
+            else -> {
+                showError(R.string.error)
+            }
+        }
+        logThrowable(t)
     }
 
 }
