@@ -17,9 +17,9 @@ import javax.inject.Inject
  * Created by adam on 2018. 02. 23..
  */
 
-class SearchResultAdapter(private val clubs: ArrayList<Club>?,
+class SearchResultAdapter(var clubs: ArrayList<Club>?,
                           private val context: Context
-) : RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>(){
+    ) : RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>(){
 
     @Inject lateinit var glideReqManager: RequestManager
 

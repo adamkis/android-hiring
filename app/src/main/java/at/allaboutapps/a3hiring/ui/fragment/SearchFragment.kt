@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_search.*
 import java.net.UnknownHostException
 import java.util.*
 import javax.inject.Inject
+import kotlin.Comparator
 
 
 /**
@@ -55,7 +56,7 @@ class SearchFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpLoadingAndError(view.findViewById(R.id.loading), view as CoordinatorLayout)
-
+        setupRecyclerView()
         if( savedInstanceState != null ){
             clubs = savedInstanceState.getParcelableArrayList(ARG_CLUBS)
             clubs?.let { showResults(it) }
@@ -64,17 +65,23 @@ class SearchFragment : BaseFragment() {
         else{
             loadData()
         }
-
     }
 
-    private fun showResults(clubs: ArrayList<Club>) {
-
-        Collections.sort(clubs, COMPARE_BY_NAME)
+    private fun setupRecyclerView(){
         val itemDecorator = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         itemDecorator.setDrawable(ContextCompat.getDrawable(activity!!, R.drawable.club_list_divider)!!)
         searchResultRV.addItemDecoration(itemDecorator)
         searchResultRV.layoutManager = LinearLayoutManager(activity as Context, LinearLayout.VERTICAL, false)
+    }
+
+    private fun showResults(clubs: ArrayList<Club>) {
+//        Collections.sort(clubs, COMPARE_BY_NAME)
         searchResultRV.adapter = SearchResultAdapter(clubs, activity as Context)
+    }
+
+    fun sort(comparator: Comparator<Club>){
+        Collections.sort((searchResultRV.adapter as SearchResultAdapter).clubs, comparator)
+        searchResultRV.adapter.notifyDataSetChanged()
     }
 
     override fun onDestroy() {

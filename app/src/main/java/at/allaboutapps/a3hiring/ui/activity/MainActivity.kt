@@ -8,6 +8,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import at.allaboutapps.a3hiring.R
+import at.allaboutapps.a3hiring.api.models.Club.Companion.COMPARE_BY_NAME
+import at.allaboutapps.a3hiring.api.models.Club.Companion.COMPARE_BY_VALUE
 import at.allaboutapps.a3hiring.ui.fragment.SearchFragment
 
 
@@ -38,8 +40,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when( item.itemId ){
-            R.id.menuSortByName -> Toast.makeText(this, "Name", Toast.LENGTH_SHORT).show()
-            R.id.menuSortByValue -> Toast.makeText(this, "Value", Toast.LENGTH_SHORT).show()
+            R.id.menuSortByName -> searchFragment?.sort(COMPARE_BY_NAME)
+            R.id.menuSortByValue -> searchFragment?.sort(COMPARE_BY_VALUE)
         }
         return super.onOptionsItemSelected(item)
     }
