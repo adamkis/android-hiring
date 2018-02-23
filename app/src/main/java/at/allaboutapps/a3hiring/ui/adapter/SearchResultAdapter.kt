@@ -10,6 +10,8 @@ import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.models.Club
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_search.view.*
 import javax.inject.Inject
 
@@ -22,6 +24,8 @@ class SearchResultAdapter(var clubs: ArrayList<Club>?,
     ) : RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>(){
 
     @Inject lateinit var glideReqManager: RequestManager
+    private val clickSubject = PublishSubject.create<Pair<Club, View>>()
+    val clickEvent: Observable<Pair<Club, View>> = clickSubject
 
     init {
         App.glideComponent.inject(this)
@@ -39,6 +43,12 @@ class SearchResultAdapter(var clubs: ArrayList<Club>?,
     override fun getItemCount(): Int = clubs?.size ?: 0
 
     inner class SearchResultViewHolder(private val view: View, private val context: Context) : RecyclerView.ViewHolder(view){
+
+        init {
+            itemView.setOnClickListener {
+                clubs?.let { clickSubject.onNext(Pair<Club, View>(it[layoutPosition], view)) }
+            }
+        }
 
         fun bind(club: Club?){
             view.clubName.text = club?.name

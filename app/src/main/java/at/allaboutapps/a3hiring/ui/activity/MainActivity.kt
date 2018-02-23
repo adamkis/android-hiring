@@ -15,7 +15,6 @@ import at.allaboutapps.a3hiring.ui.fragment.SearchFragment
 /**
  * Created by adam on 2018. 02. 23..
  */
-
 class MainActivity : AppCompatActivity() {
 
     var searchFragment: SearchFragment? = null

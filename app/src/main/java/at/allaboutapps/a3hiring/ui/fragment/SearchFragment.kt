@@ -1,20 +1,28 @@
 package at.allaboutapps.a3hiring.ui.fragment
 
+import android.annotation.TargetApi
+import android.app.Activity
 import android.content.Context
+import android.graphics.drawable.BitmapDrawable
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import at.allaboutapps.a3hiring.App
 import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.RestApi
 import at.allaboutapps.a3hiring.api.models.Club
 import at.allaboutapps.a3hiring.api.models.Club.Companion.COMPARE_BY_NAME_ASC
+import at.allaboutapps.a3hiring.helper.TransitionHelper
+import at.allaboutapps.a3hiring.ui.activity.ClubDetailActivity
 import at.allaboutapps.a3hiring.ui.adapter.SearchResultAdapter
 import com.example.run.helper.logThrowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -35,6 +43,7 @@ class SearchFragment : BaseFragment() {
 
     @Inject lateinit var restApi: RestApi
     private var callDisposable: Disposable? = null
+    private var clickDisposable: Disposable? = null
 
     private var clubs: ArrayList<Club>? = null
 
@@ -77,6 +86,12 @@ class SearchFragment : BaseFragment() {
     private fun showResults(clubs: ArrayList<Club>, comparator: Comparator<Club>? = null) {
         comparator?.let { Collections.sort(clubs, it) }
         searchResultRV.adapter = SearchResultAdapter(clubs, activity as Context)
+        clickDisposable = (searchResultRV.adapter as SearchResultAdapter).clickEvent
+                .subscribe({
+                    startDetailActivityWithTransition(activity as Activity,
+                            it.second.findViewById(R.id.clubImage),
+                            it.first)
+                })
     }
 
     fun sort(comparator: Comparator<Club>){
@@ -86,6 +101,7 @@ class SearchFragment : BaseFragment() {
 
     override fun onDestroy() {
         callDisposable?.dispose()
+        clickDisposable?.dispose()
         super.onDestroy()
     }
 
@@ -93,6 +109,27 @@ class SearchFragment : BaseFragment() {
         outState.putParcelableArrayList(ARG_CLUBS, clubs)
         super.onSaveInstanceState(outState)
     }
+
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    protected fun startDetailActivityWithTransition(activity: Activity, firstViewToAnimate: View, club: Club) {
+//        val animationBundle = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
+//                *TransitionHelper.createSafeTransitionParticipants(activity,
+//                        false,
+//                        android.support.v4.util.Pair(firstViewToAnimate, activity.getString(R.string.transition_pizza_image))
+//                ))
+//                .toBundle()
+//        if( (firstViewToAnimate as ImageView).drawable == null ){
+//            Paper.book().delete(FilePersistenceHelper.HEADER_IMAGE_KEY)
+//        }
+//        else{
+//            Paper.book().write(FilePersistenceHelper.HEADER_IMAGE_KEY, ((firstViewToAnimate as ImageView).drawable as BitmapDrawable).bitmap)
+//        }
+        val startIntent = ClubDetailActivity.getStartIntent(activity, club)
+//        startActivity(startIntent, animationBundle)
+        startActivity(startIntent)
+    }
+
 
     //MARK: Presenter
 
@@ -102,13 +139,13 @@ class SearchFragment : BaseFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { showLoading(true) }
             .doAfterTerminate { showLoading(false) }
-                .subscribe(
-                        { response ->
-                            clubs = response
-                            showResults(response, COMPARE_BY_NAME_ASC)
-                        },
-                        { t -> handleError(t) }
-                )
+            .subscribe(
+                { response ->
+                    clubs = response
+                    showResults(response, COMPARE_BY_NAME_ASC)
+                },
+                { t -> handleError(t) }
+            )
     }
 
 
