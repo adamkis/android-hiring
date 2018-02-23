@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import at.allaboutapps.a3hiring.App
 import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.models.Club
@@ -42,6 +41,15 @@ class SearchResultAdapter(private val clubs: Array<Club>?,
 
         fun bind(club: Club?){
             view.clubName.text = club?.name
+            view.clubCountry.text = club?.country
+            val worth: Int? = club?.value as? Int
+            worth?.let {
+                view.clubWorth.text = context.resources.getQuantityString(R.plurals.millions, it)
+            } ?: run {
+                view.clubWorth.text = context.getString(R.string.millions, club?.value)
+            }
+            glideReqManager.load(club?.image).into(view.clubImage)
+
         }
 
     }

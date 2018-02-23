@@ -67,9 +67,6 @@ class SearchFragment : BaseFragment() {
     private fun showResults(clubs: Array<Club>) {
         searchResultRV.layoutManager = LinearLayoutManager(activity as Context, LinearLayout.VERTICAL, false)
         searchResultRV.adapter = SearchResultAdapter(clubs, activity as Context)
-//        clubs.forEach {
-//            logDebug(it.toString())
-//        }
     }
 
     override fun onDestroy() {
