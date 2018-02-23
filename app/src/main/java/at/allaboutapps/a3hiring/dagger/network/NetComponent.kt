@@ -1,6 +1,6 @@
 package at.allaboutapps.a3hiring.dagger.network
 
-import at.allaboutapps.a3hiring.MainActivity
+import at.allaboutapps.a3hiring.ui.fragment.SearchFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -14,5 +14,5 @@ import javax.inject.Singleton
         AppModule::class,
         RetrofitModule::class))
 interface NetComponent {
-    fun inject(mainActivity: MainActivity)
+    fun inject(searchFragment: SearchFragment)
 }

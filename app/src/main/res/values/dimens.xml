@@ -1,2 +1,3 @@
 <resources>
+    <dimen name="progress_bar_height">8dp</dimen>
 </resources>
