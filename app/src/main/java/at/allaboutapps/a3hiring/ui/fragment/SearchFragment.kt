@@ -22,6 +22,10 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
 import java.net.UnknownHostException
 import javax.inject.Inject
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DividerItemDecoration
+
+
 
 /**
  * Created by adam on 2018. 02. 23..
@@ -65,6 +69,9 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun showResults(clubs: Array<Club>) {
+        val itemDecorator = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
+        itemDecorator.setDrawable(ContextCompat.getDrawable(activity!!, R.drawable.club_list_divider)!!)
+        searchResultRV.addItemDecoration(itemDecorator)
         searchResultRV.layoutManager = LinearLayoutManager(activity as Context, LinearLayout.VERTICAL, false)
         searchResultRV.adapter = SearchResultAdapter(clubs, activity as Context)
     }

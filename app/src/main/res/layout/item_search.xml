@@ -3,18 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/padding_16">
+    android:paddingLeft="@dimen/padding_16"
+    android:paddingRight="@dimen/padding_16"
+    android:paddingTop="@dimen/padding_8"
+    android:paddingBottom="@dimen/padding_8"
+    >
 
     <ImageView
         android:id="@+id/clubImage"
         android:layout_width="@dimen/image_size_list_item"
         android:layout_height="@dimen/image_size_list_item"
         android:layout_marginRight="@dimen/padding_8"
+        android:scaleType="fitCenter"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/clubData"/>
 
     <LinearLayout
+        android:id="@+id/clubData"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -29,7 +36,8 @@
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_marginBottom="@dimen/padding_8"
-            android:gravity="start"/>
+            android:gravity="start"
+            android:ellipsize="end"/>
 
         <TextView
             android:id="@+id/clubCountry"
@@ -37,7 +45,8 @@
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Caption"
             android:layout_marginBottom="@dimen/padding_8"
-            android:gravity="start"/>
+            android:gravity="start"
+            android:ellipsize="end"/>
 
         <TextView
             android:id="@+id/clubWorth"
@@ -45,7 +54,8 @@
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_marginBottom="@dimen/padding_8"
-            android:gravity="end"/>
+            android:gravity="end"
+            android:ellipsize="end"/>
 
     </LinearLayout>
 

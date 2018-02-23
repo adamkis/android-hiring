@@ -9,6 +9,7 @@ import at.allaboutapps.a3hiring.App
 import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.models.Club
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_search.view.*
 import javax.inject.Inject
 
@@ -48,7 +49,9 @@ class SearchResultAdapter(private val clubs: Array<Club>?,
             } ?: run {
                 view.clubWorth.text = context.getString(R.string.millions, club?.value)
             }
-            glideReqManager.load(club?.image).into(view.clubImage)
+            glideReqManager.load(club?.image)
+                    .apply(RequestOptions().placeholder(R.drawable.club_placeholder))
+                    .into(view.clubImage)
 
         }
 
