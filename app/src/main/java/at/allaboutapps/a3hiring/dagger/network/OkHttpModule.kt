@@ -17,10 +17,7 @@ class OkHttpModule {
     fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor,
                             application: Application
         ): OkHttpClient {
-        val cacheSize: Long = 10 * 1024 * 1024 // 10 MB
-        val cache = Cache(application.cacheDir, cacheSize)
         var builder = OkHttpClient.Builder()
-                .cache(cache)
         if (BuildConfig.DEBUG){
             builder = builder.addInterceptor(httpLoggingInterceptor)
         }
