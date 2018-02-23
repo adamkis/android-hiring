@@ -6,6 +6,8 @@
     <string name="could_not_load_data">Daten konnten nicht geladen werden</string>
     <string name="error">Fehler</string>
     <string name="millions">%d Millionen</string>
+    <string name="name">Name</string>
+    <string name="value">Vereinswert</string>
     <plurals name="millions">
         <item quantity="one">%d Million</item>
         <item quantity="other">%d Millionen</item>

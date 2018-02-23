@@ -11,10 +11,10 @@
         <menu>
             <item
                 android:id="@+id/menuSortByName"
-                android:title="Name" />
+                android:title="@string/name" />
             <item
                 android:id="@+id/menuSortByValue"
-                android:title="Value" />
+                android:title="@string/value" />
         </menu>
     </item>
 </menu>

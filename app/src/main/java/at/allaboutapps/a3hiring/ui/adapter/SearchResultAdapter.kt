@@ -43,11 +43,11 @@ class SearchResultAdapter(var clubs: ArrayList<Club>?,
         fun bind(club: Club?){
             view.clubName.text = club?.name
             view.clubCountry.text = club?.country
-            val worth: Int? = club?.value as? Int
-            worth?.let {
-                view.clubWorth.text = context.resources.getQuantityString(R.plurals.millions, it)
+            val value: Int? = club?.value as? Int
+            value?.let {
+                view.clubValue.text = context.resources.getQuantityString(R.plurals.millions, it)
             } ?: run {
-                view.clubWorth.text = context.getString(R.string.millions, club?.value)
+                view.clubValue.text = context.getString(R.string.millions, club?.value)
             }
             glideReqManager.load(club?.image)
                     .apply(RequestOptions().placeholder(R.drawable.club_placeholder))

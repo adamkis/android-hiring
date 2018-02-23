@@ -12,8 +12,8 @@ data class Club(val name: String,
                 val image: String?) : Parcelable{
 
     companion object {
-        var COMPARE_BY_NAME_ASC: Comparator<Club> = Comparator { one, other -> one.name.compareTo(other.name) }
-        var COMPARE_BY_VALUE_DESC: Comparator<Club> = Comparator { one, other -> -1 * one.value.compareTo(other.value) }
+        val COMPARE_BY_NAME_ASC: Comparator<Club> = Comparator { one, other -> one.name.compareTo(other.name) }
+        val COMPARE_BY_VALUE_DESC: Comparator<Club> = Comparator { one, other -> -1 * one.value.compareTo(other.value) }
     }
 
 }

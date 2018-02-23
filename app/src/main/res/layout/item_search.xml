@@ -49,7 +49,7 @@
             android:ellipsize="end"/>
 
         <TextView
-            android:id="@+id/clubWorth"
+            android:id="@+id/clubValue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Subhead"
