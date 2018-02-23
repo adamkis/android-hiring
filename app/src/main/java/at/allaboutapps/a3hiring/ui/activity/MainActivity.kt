@@ -6,10 +6,9 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import at.allaboutapps.a3hiring.R
-import at.allaboutapps.a3hiring.api.models.Club.Companion.COMPARE_BY_NAME
-import at.allaboutapps.a3hiring.api.models.Club.Companion.COMPARE_BY_VALUE
+import at.allaboutapps.a3hiring.api.models.Club.Companion.COMPARE_BY_NAME_ASC
+import at.allaboutapps.a3hiring.api.models.Club.Companion.COMPARE_BY_VALUE_DESC
 import at.allaboutapps.a3hiring.ui.fragment.SearchFragment
 
 
@@ -40,8 +39,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when( item.itemId ){
-            R.id.menuSortByName -> searchFragment?.sort(COMPARE_BY_NAME)
-            R.id.menuSortByValue -> searchFragment?.sort(COMPARE_BY_VALUE)
+            R.id.menuSortByName -> searchFragment?.sort(COMPARE_BY_NAME_ASC)
+            R.id.menuSortByValue -> searchFragment?.sort(COMPARE_BY_VALUE_DESC)
         }
         return super.onOptionsItemSelected(item)
     }

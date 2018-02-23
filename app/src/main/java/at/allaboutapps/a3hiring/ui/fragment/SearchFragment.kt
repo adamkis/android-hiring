@@ -14,7 +14,7 @@ import at.allaboutapps.a3hiring.App
 import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.RestApi
 import at.allaboutapps.a3hiring.api.models.Club
-import at.allaboutapps.a3hiring.api.models.Club.Companion.COMPARE_BY_NAME
+import at.allaboutapps.a3hiring.api.models.Club.Companion.COMPARE_BY_NAME_ASC
 import at.allaboutapps.a3hiring.ui.adapter.SearchResultAdapter
 import com.example.run.helper.logThrowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -74,8 +74,8 @@ class SearchFragment : BaseFragment() {
         searchResultRV.layoutManager = LinearLayoutManager(activity as Context, LinearLayout.VERTICAL, false)
     }
 
-    private fun showResults(clubs: ArrayList<Club>) {
-//        Collections.sort(clubs, COMPARE_BY_NAME)
+    private fun showResults(clubs: ArrayList<Club>, comparator: Comparator<Club>? = null) {
+        comparator?.let { Collections.sort(clubs, it) }
         searchResultRV.adapter = SearchResultAdapter(clubs, activity as Context)
     }
 
@@ -105,7 +105,7 @@ class SearchFragment : BaseFragment() {
                 .subscribe(
                         { response ->
                             clubs = response
-                            showResults(response)
+                            showResults(response, COMPARE_BY_NAME_ASC)
                         },
                         { t -> handleError(t) }
                 )
