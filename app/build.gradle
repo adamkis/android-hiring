@@ -1,11 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.kotlin.android.extensions'
-
-kapt {
-    generateStubs = true
-}
-
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27

@@ -15,7 +15,6 @@ import at.allaboutapps.a3hiring.api.models.Club
 
 class ClubDetailActivity : AppCompatActivity(){
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_club_detail)
@@ -24,7 +23,7 @@ class ClubDetailActivity : AppCompatActivity(){
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-        toolbar.title = club?.name
+        supportActionBar?.title = club?.name
         setupBackButton()
 
 //        if (savedInstanceState == null) {
@@ -43,7 +42,7 @@ class ClubDetailActivity : AppCompatActivity(){
     }
 
 
-    fun setupBackButton(){
+    private fun setupBackButton(){
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
     }
