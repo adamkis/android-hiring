@@ -9,6 +9,7 @@ import at.allaboutapps.a3hiring.dagger.glide.GlideComponent
 import at.allaboutapps.a3hiring.dagger.glide.GlideModule
 import at.allaboutapps.a3hiring.dagger.network.*
 import com.squareup.leakcanary.LeakCanary
+import io.paperdb.Paper
 import timber.log.Timber
 
 /**
@@ -59,6 +60,8 @@ class App : Application() {
             return
         }
         LeakCanary.install(this)
+        // Paper
+        Paper.init(applicationContext)
     }
 
 }

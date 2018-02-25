@@ -21,10 +21,12 @@ import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.RestApi
 import at.allaboutapps.a3hiring.api.models.Club
 import at.allaboutapps.a3hiring.api.models.Club.Companion.COMPARE_BY_NAME_ASC
+import at.allaboutapps.a3hiring.helper.FilePersistenceHelper.HEADER_IMAGE_KEY
 import at.allaboutapps.a3hiring.helper.TransitionHelper
 import at.allaboutapps.a3hiring.ui.activity.ClubDetailActivity
 import at.allaboutapps.a3hiring.ui.adapter.SearchResultAdapter
 import com.example.run.helper.logThrowable
+import io.paperdb.Paper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -32,7 +34,6 @@ import kotlinx.android.synthetic.main.fragment_search.*
 import java.net.UnknownHostException
 import java.util.*
 import javax.inject.Inject
-import kotlin.Comparator
 
 
 /**
@@ -113,21 +114,15 @@ class SearchFragment : BaseFragment() {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     protected fun startDetailActivityWithTransition(activity: Activity, firstViewToAnimate: View, club: Club) {
-//        val animationBundle = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
-//                *TransitionHelper.createSafeTransitionParticipants(activity,
-//                        false,
-//                        android.support.v4.util.Pair(firstViewToAnimate, activity.getString(R.string.transition_pizza_image))
-//                ))
-//                .toBundle()
-//        if( (firstViewToAnimate as ImageView).drawable == null ){
-//            Paper.book().delete(FilePersistenceHelper.HEADER_IMAGE_KEY)
-//        }
-//        else{
-//            Paper.book().write(FilePersistenceHelper.HEADER_IMAGE_KEY, ((firstViewToAnimate as ImageView).drawable as BitmapDrawable).bitmap)
-//        }
+        val animationBundle = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
+                *TransitionHelper.createSafeTransitionParticipants(activity,
+                        false,
+                        android.support.v4.util.Pair(firstViewToAnimate, activity.getString(R.string.transition_club_image))
+                ))
+                .toBundle()
+        Paper.book().write(HEADER_IMAGE_KEY, ((firstViewToAnimate as ImageView).drawable as BitmapDrawable).bitmap)
         val startIntent = ClubDetailActivity.getStartIntent(activity, club)
-//        startActivity(startIntent, animationBundle)
-        startActivity(startIntent)
+        startActivity(startIntent, animationBundle)
     }
 
 

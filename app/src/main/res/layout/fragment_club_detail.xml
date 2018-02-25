@@ -14,7 +14,8 @@
             android:id="@+id/clubImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerInside"/>
+            android:scaleType="centerInside"
+            android:transitionName="@string/transition_club_image"/>
         
         <TextView
             android:id="@+id/clubCountry"

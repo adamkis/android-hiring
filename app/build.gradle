@@ -51,6 +51,8 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     // Timber
     implementation 'com.jakewharton.timber:timber:4.6.0'
+    //Paper
+    compile 'io.paperdb:paperdb:2.6'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

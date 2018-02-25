@@ -3,13 +3,11 @@ package at.allaboutapps.a3hiring.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.IdRes
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.models.Club
 import at.allaboutapps.a3hiring.ui.fragment.ClubDetailFragment
-import at.allaboutapps.a3hiring.ui.fragment.SearchFragment
 
 /**
  * Created by adam on 2018. 02. 23..
