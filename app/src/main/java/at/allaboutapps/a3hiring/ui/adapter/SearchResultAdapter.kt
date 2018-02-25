@@ -55,7 +55,7 @@ class SearchResultAdapter(var clubs: ArrayList<Club>?,
             view.clubName.text = club?.name
             view.clubCountry.text = club?.country
             (club?.value?.toIntOrNull())?.let {
-                view.clubValue.text = context.resources.getQuantityString(R.plurals.millions, it)
+                view.clubValue.text = context.resources.getQuantityString(R.plurals.millions, it, it)
             } ?: run {
                 view.clubValue.text = context.getString(R.string.millions, club?.value)
             }

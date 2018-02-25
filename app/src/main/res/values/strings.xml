@@ -8,11 +8,11 @@
     <string name="name">Name</string>
     <string name="value">Vereinswert</string>
 
-    <string name="millions">%d Millionen</string>
+    <string name="millions">%1$d Millionen</string>
     <plurals name="millions">
-        <item quantity="zero">%d Million</item>
-        <item quantity="one">%d Million</item>
-        <item quantity="other">%d Millionen</item>
+        <item quantity="zero">%1$d Million</item>
+        <item quantity="one">%1$d Million</item>
+        <item quantity="other">%1$d Millionen</item>
     </plurals>
 
     <string name="club_detail_data"><![CDATA[Der Club <b>%1$s</b> aus %2$s hat einen Wert von %3$d Millionen Euro.]]></string>
