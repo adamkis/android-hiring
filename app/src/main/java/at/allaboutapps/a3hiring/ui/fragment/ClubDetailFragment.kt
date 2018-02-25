@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.models.Club
+import at.allaboutapps.a3hiring.helper.getSpannedText
 import kotlinx.android.synthetic.main.fragment_club_detail.*
 import kotlinx.android.synthetic.main.item_search.view.*
 
@@ -45,9 +46,9 @@ class ClubDetailFragment : BaseFragment() {
         club?.let {
             clubCountry.text = it.country
             (club?.value as? Int)?.let {
-                clubData.text = Html.fromHtml(resources.getQuantityString(R.plurals.club_detail_data, it, club?.name, club?.country, it))
+                clubData.text = getSpannedText(resources.getQuantityString(R.plurals.club_detail_data, it, club?.name, club?.country, it))
             } ?: run {
-                clubData.text = Html.fromHtml(getString(R.string.club_detail_data, club?.name, club?.country, club?.value))
+                clubData.text = getSpannedText(getString(R.string.club_detail_data, club?.name, club?.country, club?.value))
             }
         }
     }
