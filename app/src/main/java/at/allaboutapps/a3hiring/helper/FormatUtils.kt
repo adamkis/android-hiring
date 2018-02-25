@@ -12,3 +12,10 @@ fun getSpannedText(text: String): Spanned {
         Html.fromHtml(text)
     }
 }
+
+fun Long.toIntOrNull(): Int? {
+    if (this < Integer.MIN_VALUE || this > Integer.MAX_VALUE) {
+        return null
+    }
+    return this.toInt()
+}

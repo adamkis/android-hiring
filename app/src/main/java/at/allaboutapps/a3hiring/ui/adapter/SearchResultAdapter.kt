@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import at.allaboutapps.a3hiring.App
 import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.models.Club
+import at.allaboutapps.a3hiring.helper.toIntOrNull
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import io.reactivex.Observable
@@ -53,8 +54,7 @@ class SearchResultAdapter(var clubs: ArrayList<Club>?,
         fun bind(club: Club?){
             view.clubName.text = club?.name
             view.clubCountry.text = club?.country
-            val value: Int? = club?.value as? Int
-            value?.let {
+            (club?.value?.toIntOrNull())?.let {
                 view.clubValue.text = context.resources.getQuantityString(R.plurals.millions, it)
             } ?: run {
                 view.clubValue.text = context.getString(R.string.millions, club?.value)

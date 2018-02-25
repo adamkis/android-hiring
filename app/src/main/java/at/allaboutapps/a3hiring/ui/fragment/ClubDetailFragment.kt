@@ -8,6 +8,7 @@ import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.models.Club
 import at.allaboutapps.a3hiring.helper.FilePersistenceHelper.HEADER_IMAGE_KEY
 import at.allaboutapps.a3hiring.helper.getSpannedText
+import at.allaboutapps.a3hiring.helper.toIntOrNull
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.fragment_club_detail.*
 
@@ -45,7 +46,7 @@ class ClubDetailFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         club?.let {
             clubCountry.text = it.country
-            (club?.value as? Int)?.let {
+            (club?.value?.toIntOrNull())?.let {
                 clubData.text = getSpannedText(resources.getQuantityString(R.plurals.club_detail_data, it, club?.name, club?.country, it))
             } ?: run {
                 clubData.text = getSpannedText(getString(R.string.club_detail_data, club?.name, club?.country, club?.value))
