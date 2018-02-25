@@ -43,7 +43,6 @@ class ClubDetailActivity : AppCompatActivity(){
         }
     }
 
-
     private fun setupBackButton(){
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)

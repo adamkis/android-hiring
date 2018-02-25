@@ -25,10 +25,6 @@ class App : Application() {
         lateinit var glideComponent: GlideComponent
     }
 
-    fun setNetComponent(netComponent: NetComponent){
-        App.netComponent = netComponent
-    }
-
     fun createNetComponent(baseUrl: String): NetComponent {
         return DaggerNetComponent.builder()
                 .okHttpModule(OkHttpModule())
@@ -53,8 +49,8 @@ class App : Application() {
         // Timber
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
+            Timber.tag("A3")
         }
-        Timber.tag("A3")
         // LeakCanary
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return
