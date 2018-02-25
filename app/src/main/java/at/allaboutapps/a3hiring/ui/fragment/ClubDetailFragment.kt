@@ -1,12 +1,14 @@
 package at.allaboutapps.a3hiring.ui.fragment
 
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.models.Club
 import kotlinx.android.synthetic.main.fragment_club_detail.*
+import kotlinx.android.synthetic.main.item_search.view.*
 
 /**
  * Created by adam on 2018. 02. 25..
@@ -42,7 +44,11 @@ class ClubDetailFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         club?.let {
             clubCountry.text = it.country
-            clubData.text = it.value.toString()
+            (club?.value as? Int)?.let {
+                clubData.text = Html.fromHtml(resources.getQuantityString(R.plurals.club_detail_data, it, club?.name, club?.country, it))
+            } ?: run {
+                clubData.text = Html.fromHtml(getString(R.string.club_detail_data, club?.name, club?.country, club?.value))
+            }
         }
     }
 

@@ -5,11 +5,19 @@
     <string name="network_error">Netzwerkfehler</string>
     <string name="could_not_load_data">Daten konnten nicht geladen werden</string>
     <string name="error">Fehler</string>
-    <string name="millions">%d Millionen</string>
     <string name="name">Name</string>
     <string name="value">Vereinswert</string>
+
+    <string name="millions">%d Millionen</string>
     <plurals name="millions">
         <item quantity="one">%d Million</item>
         <item quantity="other">%d Millionen</item>
     </plurals>
+
+    <string name="club_detail_data"><![CDATA[Der Club <b>%1$s</b> aus %2$s hat einen Wert von %3$d Millionen Euro.]]></string>
+    <plurals name="club_detail_data">
+        <item quantity="one"><![CDATA[Der Club <b>%1$s</b> aus %2$s hat einen Wert von %3$d Million Euro.]]></item>
+        <item quantity="other"><![CDATA[Der Club <b>%1$s</b> aus %2$s hat einen Wert von %3$d Millionen Euro.]]></item>
+    </plurals>
+
 </resources>
