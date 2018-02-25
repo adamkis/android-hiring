@@ -1,5 +1,6 @@
 package at.allaboutapps.a3hiring.ui.fragment
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,12 @@ import at.allaboutapps.a3hiring.api.models.Club
 import at.allaboutapps.a3hiring.helper.FilePersistenceHelper.HEADER_IMAGE_KEY
 import at.allaboutapps.a3hiring.helper.getSpannedText
 import at.allaboutapps.a3hiring.helper.toIntOrNull
+import com.example.run.helper.logThrowable
 import io.paperdb.Paper
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_club_detail.*
 
 /**
@@ -19,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_club_detail.*
 class ClubDetailFragment : BaseFragment() {
 
     private var club: Club? = null
+    private var paperDisposable: Disposable? = null
 
     companion object {
         private val ARG_CLUB = "ARG_CLUB"
@@ -51,7 +58,13 @@ class ClubDetailFragment : BaseFragment() {
             } ?: run {
                 clubData.text = getSpannedText(getString(R.string.club_detail_data, club?.name, club?.country, club?.value))
             }
-            clubImage.setImageBitmap(Paper.book().read(HEADER_IMAGE_KEY))
+            paperDisposable = Observable.just<Bitmap>(Paper.book().read(HEADER_IMAGE_KEY))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        { clubImage.setImageBitmap(it)},
+                        { logThrowable(it) }
+                    )
         }
     }
 
@@ -59,5 +72,12 @@ class ClubDetailFragment : BaseFragment() {
         outState.putParcelable(ARG_CLUB, club)
         super.onSaveInstanceState(outState)
     }
+
+
+    override fun onDestroy() {
+        paperDisposable?.dispose()
+        super.onDestroy()
+    }
+
 
 }

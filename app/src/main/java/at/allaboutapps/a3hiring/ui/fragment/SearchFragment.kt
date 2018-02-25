@@ -27,6 +27,7 @@ import at.allaboutapps.a3hiring.ui.activity.ClubDetailActivity
 import at.allaboutapps.a3hiring.ui.adapter.SearchResultAdapter
 import com.example.run.helper.logThrowable
 import io.paperdb.Paper
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -45,6 +46,7 @@ class SearchFragment : BaseFragment() {
     @Inject lateinit var restApi: RestApi
     private var callDisposable: Disposable? = null
     private var clickDisposable: Disposable? = null
+    private var paperDisposable: Disposable? = null
 
     private var clubs: ArrayList<Club>? = null
 
@@ -103,6 +105,7 @@ class SearchFragment : BaseFragment() {
     override fun onDestroy() {
         callDisposable?.dispose()
         clickDisposable?.dispose()
+        paperDisposable?.dispose()
         super.onDestroy()
     }
 
@@ -120,9 +123,14 @@ class SearchFragment : BaseFragment() {
                         android.support.v4.util.Pair(firstViewToAnimate, activity.getString(R.string.transition_club_image))
                 ))
                 .toBundle()
-        Paper.book().write(HEADER_IMAGE_KEY, ((firstViewToAnimate as ImageView).drawable as BitmapDrawable).bitmap)
-        val startIntent = ClubDetailActivity.getStartIntent(activity, club)
-        startActivity(startIntent, animationBundle)
+        paperDisposable =  Observable.just(
+                Paper.book().write(HEADER_IMAGE_KEY, ((firstViewToAnimate as ImageView).drawable as BitmapDrawable).bitmap))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe (
+                    { startActivity(ClubDetailActivity.getStartIntent(activity, club), animationBundle) },
+                    { logThrowable(it) }
+                )
     }
 
 
