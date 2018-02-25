@@ -1,7 +1,11 @@
 <resources>
+
     <dimen name="progress_bar_height">8dp</dimen>
     <dimen name="image_size_list_item">100dp</dimen>
+    <dimen name="club_detail_header_height">250dp</dimen>
+
     <dimen name="padding_16">16dp</dimen>
     <dimen name="padding_8">8dp</dimen>
-    <dimen name="club_detail_header_height">250dp</dimen>
+    <dimen name="padding_2">2dp</dimen>
+
 </resources>

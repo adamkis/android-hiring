@@ -23,8 +23,9 @@
     <LinearLayout
         android:id="@+id/clubData"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        android:gravity="center_vertical"
         app:layout_constraintLeft_toRightOf="@+id/clubImage"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Title"
-            android:layout_marginBottom="@dimen/padding_8"
+            android:layout_marginBottom="@dimen/padding_2"
             android:gravity="start"
             android:ellipsize="end"/>
 
@@ -44,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Caption"
-            android:layout_marginBottom="@dimen/padding_8"
+            android:layout_marginBottom="@dimen/padding_2"
             android:gravity="start"
             android:ellipsize="end"/>
 
@@ -53,7 +54,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_marginBottom="@dimen/padding_8"
             android:gravity="end"
             android:ellipsize="end"/>
 
