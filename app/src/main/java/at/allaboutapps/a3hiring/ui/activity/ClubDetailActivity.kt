@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import at.allaboutapps.a3hiring.R
 import at.allaboutapps.a3hiring.api.models.Club
+import at.allaboutapps.a3hiring.ui.fragment.ClubDetailFragment
+import at.allaboutapps.a3hiring.ui.fragment.SearchFragment
 
 /**
  * Created by adam on 2018. 02. 23..
@@ -26,9 +28,11 @@ class ClubDetailActivity : AppCompatActivity(){
         supportActionBar?.title = club?.name
         setupBackButton()
 
-//        if (savedInstanceState == null) {
-//            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, PizzaDetailFragment.newInstance(pizza, ingredientsHM, pizzasResponse)).commit()
-//        }
+        var clubDetailFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as? ClubDetailFragment
+        if (clubDetailFragment == null) {
+            clubDetailFragment = ClubDetailFragment.newInstance(club)
+            supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, clubDetailFragment).commit()
+        }
     }
 
     companion object {

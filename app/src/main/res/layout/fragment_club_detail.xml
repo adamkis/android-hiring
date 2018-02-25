@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/club_detail_header_height"
+        android:background="@color/greyDark">
+
+        <ImageView
+            android:id="@+id/clubImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"/>
+        
+        <TextView
+            android:id="@+id/clubCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_8"
+            android:layout_gravity="bottom|left"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@android:color/primary_text_dark"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/clubData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_8"
+        android:layout_gravity="bottom|left"
+        style="@style/TextAppearance.AppCompat.Body1"/>
+
+</LinearLayout>
