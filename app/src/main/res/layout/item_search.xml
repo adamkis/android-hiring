@@ -7,6 +7,7 @@
     android:paddingRight="@dimen/padding_16"
     android:paddingTop="@dimen/padding_8"
     android:paddingBottom="@dimen/padding_8"
+    android:foreground="?android:attr/selectableItemBackground"
     >
 
     <ImageView
